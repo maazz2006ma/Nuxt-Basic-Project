@@ -14,10 +14,14 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  runtimeConfig: {
+    authSecret: process.env.AUTH_SECRET
+  },
   modules: [
     'nuxt-mongoose', 'nuxt-server-utils', '@sidebase/nuxt-auth'
   ],
   auth: {
+    baseURL: process.env.AUTH_ORIGIN,
     provider: {
         type: 'authjs'
     }

@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "next-auth": "^4.22.5",
+    "next-auth": "^4.21.1",
     "nuxt": "^3.10.3",
     "nuxt-mongoose": "^1.0.5",
     "nuxt-server-utils": "^0.0.7",

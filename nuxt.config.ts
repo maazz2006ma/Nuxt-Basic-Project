@@ -15,10 +15,19 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    'nuxt-mongoose', 'nuxt-server-utils',
+    'nuxt-mongoose', 'nuxt-server-utils', '@sidebase/nuxt-auth'
   ],
+  auth: {
+    provider: {
+        type: 'authjs'
+    }
+  },
   mongoose: {
     uri: process.env.MONGODB_URI,
-    
+    modelsDir: 'models',
+    devtools: true,
   },
+  nuxtServerUtils:{
+    mongodbUri: process.env.MONGODB_URI
+  }
 })

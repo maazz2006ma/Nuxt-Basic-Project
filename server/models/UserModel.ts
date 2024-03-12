@@ -1,4 +1,10 @@
 import mongoose from 'mongoose'
+export interface UserDocument extends Document{
+  email: String,
+  password: String,
+  name: String
+}
+
 const UserModelSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -12,12 +18,12 @@ const UserModelSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minLength: 8
+    length: [8, 'Password must be at least 8 characters long']
   },
   name: {
     type: String,
     trim: true
   }
 })
-const User = mongoose.model('User', UserModelSchema);
+const User = mongoose.model<UserDocument>('User', UserModelSchema);
 export default User

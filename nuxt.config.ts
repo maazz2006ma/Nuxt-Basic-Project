@@ -7,6 +7,16 @@ export default defineNuxtConfig({
   alias: {
     '@': resolve(__dirname, '/')
   },
+  typescript: {
+    typeCheck: true,
+  },
+  app:{
+    head: {
+      link: [
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap' }
+      ]
+    }
+  },
   css: ["~/assets/main.scss"],
   postcss: {
     plugins: {
@@ -18,7 +28,19 @@ export default defineNuxtConfig({
     authSecret: process.env.AUTH_SECRET
   },
   modules: [
-    'nuxt-mongoose', 'nuxt-server-utils', '@sidebase/nuxt-auth'
+    'nuxt-mongoose', 'nuxt-server-utils', '@sidebase/nuxt-auth',
+    [
+      '@vee-validate/nuxt',
+      {
+        autoImports: true,
+        componentNames: {
+          Form: 'VeeForm',
+          Field: 'VeeField',
+          FieldArray: 'VeeFieldArray',
+          ErrorMessage: 'VeeErrorMessage',
+        },
+      },
+    ],
   ],
   auth: {
     baseURL: process.env.AUTH_ORIGIN,

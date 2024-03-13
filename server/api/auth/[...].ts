@@ -14,7 +14,7 @@ export default NuxtAuthHandler({
     })
   ],
   pages:{
-    signIn: "/Login"
+    signIn: "/login"
   },
   session:{
     strategy: 'jwt'

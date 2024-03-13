@@ -43,6 +43,9 @@
   </div>
 </template>
 <script setup lang="ts">
+definePageMeta({
+    layout: 'default'
+})
 import { ref } from 'vue';
 import * as yup from 'yup';
 const email = ref<String>('')

@@ -1,5 +1,6 @@
 import { NuxtAuthHandler } from "#auth"
 import  CredentialsProvider  from "next-auth/providers/credentials"
+import User from "~/server/models/UserModel"
 export default NuxtAuthHandler({
 
   secret: useRuntimeConfig().authSecret,
@@ -8,13 +9,14 @@ export default NuxtAuthHandler({
     CredentialsProvider.default({
       name: 'credentials',
       credentials:{},
-      async authorize( credentials:{ username: String, password: String }){
+      async authorize( credentials:{ email: String, password: String }){
+        const user = User.findOne({ email : credentials.email })
         return {}
       }
     })
   ],
   pages:{
-    signIn: "/login"
+    signIn: "/login",
   },
   session:{
     strategy: 'jwt'

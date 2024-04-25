@@ -53,11 +53,6 @@ const schema =
     password: yup.string().min(8).required()
   }) 
 
-type Schema = InferType<typeof schema>
-
-const { handleSubmit, values } = useForm({
-  validationSchema: schema,
-});
 
 const formState = reactive({
   email: undefined,
@@ -73,6 +68,7 @@ async function onSubmit(){
           body: { 'name': formState.name , 'email': formState.email, 'password': formState.password}
       }
     )
+    useRouter().push('login')
     
   } catch (error) {
     

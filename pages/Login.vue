@@ -7,7 +7,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <VeeForm class="space-y-6" :validation-schema="schema" :state="formState" name="asdasd"  @submit="onSubmit">
+      <VeeForm class="space-y-6" :validation-schema="schema" :state="formState" @submit="onSubmit">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
@@ -46,7 +46,6 @@
 definePageMeta({
     layout: 'default'
 })
-import { ref } from 'vue';
 import * as yup from 'yup';
 const formState = reactive({
   email: undefined,

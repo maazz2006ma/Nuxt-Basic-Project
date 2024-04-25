@@ -2,7 +2,6 @@ import User from "~/server/models/UserModel"
 import bcrypt from 'bcrypt'
 
 export default defineEventHandler(async (event) => {
-  debugger;
   const body = await readBody(event)
   if(!body.email || !body.name || !body.password ){
     throw createError({

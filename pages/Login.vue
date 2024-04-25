@@ -7,12 +7,12 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <VeeForm class="space-y-6" :validation-schema="schema" @submit.prevent="onSubmit">
+      <VeeForm class="space-y-6" :validation-schema="schema" :state="formState" name="asdasd"  @submit="onSubmit">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
-            <VeeField id="email" name="email" v-model="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            <VeeErrorMessage/>
+            <VeeField id="email" name="email" v-model="formState.email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <VeeErrorMessage name="email"/>
           </div>
         </div>
 
@@ -24,8 +24,8 @@
             </div>
           </div>
           <div class="mt-2">
-            <VeeField id="password" name="password" v-model="password" type="password" autocomplete="current-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            <VeeErrorMessage/>
+            <VeeField id="password" name="password" v-model="formState.password" type="password" autocomplete="current-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <VeeErrorMessage name="password"/>
           </div>
         </div>
 
@@ -48,13 +48,25 @@ definePageMeta({
 })
 import { ref } from 'vue';
 import * as yup from 'yup';
-const email = ref<String>('')
-const password = ref<String>('')
+const formState = reactive({
+  email: undefined,
+  password: undefined
+})
 const schema = yup.object({
   email: yup.string().email().required(),
-  password : yup.string().min(8).required()
+  password: yup.string().min(8).required()
 })
-function onSubmit(){
-  
+const { handleSubmit, values } = useForm({
+  validationSchema: schema,
+});
+type Schema = InferType<typeof schema>
+
+
+async function onSubmit (event: FormSubmitEvent<Schema>) {
+  console.log(email.value)
+  console.log(password.value)
 }
+
+  
+
 </script>

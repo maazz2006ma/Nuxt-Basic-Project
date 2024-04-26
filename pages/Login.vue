@@ -43,27 +43,30 @@
   </div>
 </template>
 <script setup lang="ts">
-definePageMeta({
-    layout: 'default'
-})
 import * as yup from 'yup';
-const formState = reactive({
-  email: undefined,
-  password: undefined
+const { signIn } = useAuth()
+definePageMeta({
+    layout: 'default',
+    middleware: 'guest'
 })
+const formState = ref({
+  email: "",
+  password: "",
+});
 const schema = yup.object({
   email: yup.string().email().required(),
   password: yup.string().min(8).required()
 })
-const { handleSubmit, values } = useForm({
-  validationSchema: schema,
-});
-type Schema = InferType<typeof schema>
 
 
-async function onSubmit (event: FormSubmitEvent<Schema>) {
-  console.log(email.value)
-  console.log(password.value)
+async function onSubmit () {
+  try {
+    await signIn("credentials", formState.value)
+    useRouter().push('/')
+  } catch (error) {
+    
+  }
+  
 }
 
   
